@@ -1,3 +1,11 @@
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "PedtritoAlejos_spring-boot-kubernetes"
+    property "sonar.organization", "pedtritoalejos"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+
 # spring-boot-kubernetes
 ## Create Dockerfile
 ```
