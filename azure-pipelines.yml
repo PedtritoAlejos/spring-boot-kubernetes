@@ -11,28 +11,31 @@ pool: Default
 stages:
 - stage: Review SAST 
   jobs:
-  - job: Review
-    displayName: 'Review with Sonar-Cloud'
+  - job: sonar
+    workspace:
+      clean: all
+    displayName:  Code Review
     steps:
-    - task: Gradle@3
-      inputs:
-        gradleWrapperFile: 'gradlew'
-        tasks: 'build'
-        publishJUnitResults: true
-        testResultsFiles: '**/TEST-*.xml'
-        javaHomeOption: 'JDKVersion'
-        sonarQubeRunAnalysis: false
-        spotBugsAnalysis: false
-
-    - task: CopyFiles@2
-      inputs:
-        sourceFolder: '$(Build.SourcesDirectory)'
-        contents: |
-            **/build/libs/*.jar
-        targetFolder: '$(Build.ArtifactStagingDirectory)'
-
-    - task: PublishBuildArtifacts@1
-      inputs:
-        pathToPublish: '$(Build.ArtifactStagingDirectory)'
-        artifactName: appJar
-        publishLocation: 'Container'
+      - task: SonarCloudPrepare@1
+        inputs:
+          SonarCloud: 'sonar-cloud'
+          organization: 'Pedrito Alejos'
+          projectKey: 'pedtritoalejos'
+          projectName: 'spring-boot-kubernetes'
+        displayName: 'Preparing Sonarqube Environment'
+    
+      - task: Gradle@3
+        inputs:
+          gradleWrapperFile: 'gradlew'
+          tasks: "sonarqube"
+          javaHomeOption: 'JDKVersion'
+          sonarQubeRunAnalysis: true
+          sqGradlePluginVersionChoice: 'specify'
+          sonarQubeGradlePluginVersion: '3.3'
+        displayName: 'Analyze current Branch'
+    
+  
+      - task: SonarCloudPublish@1
+        inputs:
+          pollingTimeoutSec: '300'
+        displayName: 'Publish Analysis Results'
