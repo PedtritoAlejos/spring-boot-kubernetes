@@ -19,7 +19,7 @@ stages:
       - task: SonarCloudPrepare@1
         inputs:
           SonarCloud: 'sonar-cloud'
-          organization: 'Pedrito Alejos'
+          organization: 'tarea-04'
           projectKey: 'pedtritoalejos'
           projectName: 'spring-boot-kubernetes'
         displayName: 'Preparing Sonarqube Environment'
