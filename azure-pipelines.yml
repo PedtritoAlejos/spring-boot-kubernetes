@@ -8,12 +8,31 @@ trigger:
 
 pool: Default
   
+stages:
+- stage: Review SAST 
+  jobs:
+  - job: Review
+    displayName: 'Review with Sonar-Cloud'
+    steps:
+    - task: Gradle@3
+      inputs:
+        gradleWrapperFile: 'gradlew'
+        tasks: 'build'
+        publishJUnitResults: true
+        testResultsFiles: '**/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
+        spotBugsAnalysis: false
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+    - task: CopyFiles@2
+      inputs:
+        sourceFolder: '$(Build.SourcesDirectory)'
+        contents: |
+            **/build/libs/*.jar
+        targetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: '$(Build.ArtifactStagingDirectory)'
+        artifactName: appJar
+        publishLocation: 'Container'
