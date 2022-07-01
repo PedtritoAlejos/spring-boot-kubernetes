@@ -9,7 +9,7 @@ trigger:
 pool: Default
   
 stages:
-- stage: Review SAST 
+- stage: Review_SAST 
   jobs:
   - job: sonar
     workspace:
