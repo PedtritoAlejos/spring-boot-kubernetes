@@ -33,7 +33,6 @@ stages:
           sqGradlePluginVersionChoice: 'specify'
           sonarQubeGradlePluginVersion: '3.3'
         displayName: 'Analyze current Branch'
-
   
       - task: SonarCloudPublish@1
         inputs:
