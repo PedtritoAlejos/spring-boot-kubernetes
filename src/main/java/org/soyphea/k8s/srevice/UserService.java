@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserService {
 
-    List<User> users = Arrays.asList(new User(1, "Dara"), new User(2, "Seyha"));
+    List<User> users = Arrays.asList(new User(), new User());
 
     public List<User> getUser(String containName) {
 

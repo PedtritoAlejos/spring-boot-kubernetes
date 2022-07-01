@@ -1,6 +1,7 @@
 package org.soyphea.k8s;
 
 import lombok.extern.slf4j.Slf4j;
+
 import org.soyphea.k8s.config.UserConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +22,7 @@ public class K8SApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info(" Fetched user from k8s ConfigMap <spring-boot-k8s> is :{}", userConfig);
+      //  Logger.info(" Fetched user from k8s ConfigMap <spring-boot-k8s> is :{}", userConfig);
 
     }
 }
