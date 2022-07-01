@@ -24,12 +24,12 @@ public class Controller {
     private UserService userService;
 
     public Controller(){
-        log.info("Initialised Bean.");
+       // log.info("Initialised Bean.");
     }
     @GetMapping("/k8s/{name}")
     public String k8sGreeting(@PathVariable("name") String name) {
 
-        log.info("Got the request with name:{}", name);
+       // log.info("Got the request with name:{}", name);
         return String.format("Hi %s- I am ConfigMap running in side k8s with value %s", name,userConfig);
     }
 
