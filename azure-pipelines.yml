@@ -62,3 +62,9 @@ stages:
         inputs:
           SonarCloud: 'sonar-cloud'
           organization: '$(sonarCloudOrganization)'
+
+      - task: dependency-check-build-task@6
+        inputs:
+          projectName: 'spring-boot-kubernetes'
+          scanPath: '**/*.jar'
+          format: 'HTML'
