@@ -39,8 +39,8 @@ stages:
         inputs:
           SonarCloud: 'sonar-cloud'
           organization: '$(sonarCloudOrganization)'
-          projectKey: 'PedtritoAlejos_spring-boot-kubernetes'
-          projectName: 'spring-boot-kubernetes'
+          projectKey: '$(sonarCloudProjectKey)'
+          projectName: '$(sonarCloudProjectName)'
         displayName: 'Preparing Sonarqube Environment'
     
       - task: Gradle@3
@@ -61,4 +61,4 @@ stages:
       - task: sonarcloud-buildbreaker@2
         inputs:
           SonarCloud: 'sonar-cloud'
-          organization: 'pedtritoalejos'
+          organization: '$(sonarCloudOrganization)'
