@@ -18,6 +18,10 @@ public class K8SApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(K8SApplication.class, args);
+        String xVaultToken = System.getenv("XVaultToken");
+        String cityAppConfig = System.getenv("CityApp_Config");
+        System.out.println(xVaultToken);
+        System.out.println(cityAppConfig);
     }
 
     @Override
