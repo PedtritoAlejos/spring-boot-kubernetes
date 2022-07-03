@@ -22,6 +22,8 @@ public class K8SApplication implements CommandLineRunner {
         String cityAppConfig = System.getenv("CityApp_Config");
         System.out.println(xVaultToken);
         System.out.println(cityAppConfig);
+        String user = "root";
+        String pass = "123456789";
     }
 
     @Override
