@@ -2,11 +2,13 @@ package org.soyphea.k8s;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.net.UnknownHostException;
+import java.io.File;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.soyphea.k8s.config.UserConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -30,17 +32,19 @@ public class K8SApplication implements CommandLineRunner {
         String user = "root";
         String pass = "123456789";
     }
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws UnknownHostException
-    {
-        String input = req.getParameter("input");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+       
+		String file = "users-card.csv";
 
-        MongoClient mongoClient = new MongoClient();
-        DB database             = mongoClient.getDB("exampleDatabase");
-        //DBCollection collection = database.getCollection("exampleCollection");
-        //BasicDBObject query     = new BasicDBObject();
-
-       // query.put("$where", "this.field == \"" + input + "\""); // Noncompliant
+        File fileUnsafe = new File(file);
+        try {
+          FileUtils.forceDelete(fileUnsafe); // Noncompliant
+        }
+        catch(IOException ex){
+          System.out.println (ex.toString());
+        }
     }
+  
 
     @Override
     public void run(String... args) throws Exception {
