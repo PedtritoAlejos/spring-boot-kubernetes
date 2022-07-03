@@ -10,22 +10,22 @@ pool: Default
   
 stages:
 
-- stage: Build
-  jobs:
-  - job: build
-    displayName: 'Build'
-    steps:
-    - task: Gradle@3
-      inputs:
-        gradleWrapperFile: 'gradlew'
-        tasks: 'build'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        sonarQubeRunAnalysis: false
-        spotBugsAnalysis: false
+# - stage: Build
+#   jobs:
+#   - job: build
+#     displayName: 'Build'
+#     steps:
+#     - task: Gradle@3
+#       inputs:
+#         gradleWrapperFile: 'gradlew'
+#         tasks: 'build'
+#         publishJUnitResults: false
+#         javaHomeOption: 'JDKVersion'
+#         sonarQubeRunAnalysis: false
+#         spotBugsAnalysis: false
 
 - stage: Review_SAST
-  dependsOn: Build
+  #dependsOn: Build
   
   jobs:
   - job: sonar
@@ -55,3 +55,8 @@ stages:
         inputs:
           pollingTimeoutSec: '300'
         displayName: 'Publish Analysis Results'
+        
+      - task: sonarcloud-buildbreaker@2
+        inputs:
+          SonarCloud: 'sonar-cloud'
+          organization: 'pedtritoalejos'
