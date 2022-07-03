@@ -7,6 +7,8 @@ trigger:
 - master
 
 pool: Default
+variables:
+- group: sonarcloud-properties
   
 stages:
 
@@ -36,7 +38,7 @@ stages:
       - task: SonarCloudPrepare@1
         inputs:
           SonarCloud: 'sonar-cloud'
-          organization: 'pedtritoalejos'
+          organization: '$(sonarCloudOrganization)'
           projectKey: 'PedtritoAlejos_spring-boot-kubernetes'
           projectName: 'spring-boot-kubernetes'
         displayName: 'Preparing Sonarqube Environment'
