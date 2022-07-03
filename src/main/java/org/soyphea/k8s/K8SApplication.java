@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.File;
 import java.io.IOException;
 
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.PBEParameterSpec;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,6 +33,12 @@ public class K8SApplication implements CommandLineRunner {
         System.out.println(cityAppConfig);
         String user = "root";
         String pass = "123456789";
+        byte[] salt = "notrandom".getBytes();
+
+        PBEParameterSpec cipherSpec = new PBEParameterSpec(salt, 10000); // Noncompliant, predictable salt
+      
+		char[] chars = null;
+		PBEKeySpec spec = new PBEKeySpec(chars, salt, 10000, 256); // Noncompliant, predictable salt
     }
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
        
@@ -39,6 +47,7 @@ public class K8SApplication implements CommandLineRunner {
         File fileUnsafe = new File(file);
         try {
           FileUtils.forceDelete(fileUnsafe); // Noncompliant
+   
         }
         catch(IOException ex){
           System.out.println (ex.toString());
