@@ -75,7 +75,7 @@ stages:
         scanPath: '**/*.jar'
         format: 'JUNIT'
         reportsDirectory: '$(Common.TestResultsDirectory)'
-        reportFilename: 'dependency-check\*junit.xml'
+        reportFilename: 'dependency-check\junit.xml'
 
 
         
