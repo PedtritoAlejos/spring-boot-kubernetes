@@ -77,5 +77,10 @@ stages:
         reportsDirectory: '$(Common.TestResultsDirectory)'
         reportFilename: 'dependency-check\junit.xml'
 
+     - task: PublishTestResults@2
+       displayName: 'result dependency-check'
+       inputs:
+        testResultsFiles: 'dependency-check\*junit.xml'
+
 
         
