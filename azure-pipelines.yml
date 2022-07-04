@@ -12,27 +12,25 @@ variables:
   
 stages:
 
-# - stage: Build
-#   jobs:
-#   - job: build
-#     displayName: 'Build'
-#     steps:
-#     - task: Gradle@3
-#       inputs:
-#         gradleWrapperFile: 'gradlew'
-#         tasks: 'build'
-#         publishJUnitResults: false
-#         javaHomeOption: 'JDKVersion'
-#         sonarQubeRunAnalysis: false
-#         spotBugsAnalysis: false
+- stage: Build
+  jobs:
+  - job: build
+    displayName: 'Build'
+    steps:
+    - task: Gradle@3
+      inputs:
+        gradleWrapperFile: 'gradlew'
+        tasks: 'build'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
+        spotBugsAnalysis: false
 
 - stage: Review_SAST
-  #dependsOn: Build
+  dependsOn: Build
   
   jobs:
   - job: sonar
-    workspace:
-      clean: all
     displayName:  Code Review
     steps:
       - task: SonarCloudPrepare@1
@@ -63,8 +61,15 @@ stages:
           SonarCloud: 'sonar-cloud'
           organization: '$(sonarCloudOrganization)'
 
-      - task: dependency-check-build-task@6
-        inputs:
-          projectName: 'spring-boot-kubernetes'
-          scanPath: '**/*.jar'
-          format: 'HTML'
+- stage: Review_SCA
+  dependsOn: Review_SAST
+  
+  jobs:
+  - job: sca
+    displayName: SCA
+    steps:
+     - task: dependency-check-build-task@6
+       inputs:
+        projectName: 'spring-boot-kubernetes'
+        scanPath: '**/*.jar'
+        format: 'HTML'
