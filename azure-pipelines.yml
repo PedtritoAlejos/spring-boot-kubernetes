@@ -6,7 +6,8 @@
 trigger:
 - master
 
-pool: Default
+#pool: Default
+pool: Azure Pipelines
 variables:
 - group: sonarcloud-properties
   
