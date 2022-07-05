@@ -71,7 +71,7 @@ stages:
      - task: dependency-check-build-task@6
        inputs:
          projectName: 'spring-boot-kubernetes'
-         scanPath: '$(Pipeline.Workspace)'
+         scanPath: '**/*.jar'
          format: 'HTML'
          
 
