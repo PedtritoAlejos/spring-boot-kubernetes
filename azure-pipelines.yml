@@ -71,16 +71,11 @@ stages:
     steps:
      - task: dependency-check-build-task@6
        inputs:
-        projectName: 'spring-boot-kubernetes'
-        scanPath: '**/*.jar'
-        format: 'JUNIT'
-        reportsDirectory: '$(Common.TestResultsDirectory)'
-        reportFilename: 'dependency-check/junit.xml'
+         projectName: 'spring-boot-kubernetes'
+         scanPath: '$(Pipeline.Workspace)'
+         format: 'HTML'
+         
 
-     - task: PublishTestResults@2
-       displayName: 'result dependency-check'
-       inputs:
-        testResultsFiles: 'dependency-check/junit.xml'
 
 
         
