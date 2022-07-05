@@ -63,11 +63,10 @@ stages:
 
 - stage: Review_SCA
   #dependsOn: Review_SAST
-  dependsOn: Build
-  
+  #dependsOn: Build
   jobs:
   - job: sca
-    displayName: SCA
+    displayName: Review SCA
     steps:
      - task: dependency-check-build-task@6
        inputs:
