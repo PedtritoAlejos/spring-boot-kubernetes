@@ -12,19 +12,19 @@ variables:
   
 stages:
 
-- stage: Build
-  jobs:
-  - job: build
-    displayName: 'Build'
-    steps:
-    - task: Gradle@3
-      inputs:
-        gradleWrapperFile: 'gradlew'
-        tasks: 'build'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        sonarQubeRunAnalysis: false
-        spotBugsAnalysis: false
+# - stage: Build
+#   jobs:
+#   - job: build
+#     displayName: 'Build'
+#     steps:
+#     - task: Gradle@3
+#       inputs:
+#         gradleWrapperFile: 'gradlew'
+#         tasks: 'build'
+#         publishJUnitResults: false
+#         javaHomeOption: 'JDKVersion'
+#         sonarQubeRunAnalysis: false
+#         spotBugsAnalysis: false
 
 # - stage: Review_SAST
 #   dependsOn: Build
