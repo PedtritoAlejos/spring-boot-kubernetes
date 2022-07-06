@@ -84,7 +84,7 @@ stages:
 
      - task: CmdLine@2
        inputs:
-        script: ls -l 
+        script: ls -l /Jar
 
     #  - task: dependency-check-build-task@6
     #    inputs:
