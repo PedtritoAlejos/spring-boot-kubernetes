@@ -30,6 +30,9 @@ stages:
       inputs:
        script: ls -l build/libs/spring-boot-kubernetes-0.0.1-SNAPSHOT.jar
 
+    - publish: $(System.DefaultWorkingDirectory)/build/libs/
+      artifact: Jar
+
 # - stage: Review_SAST
 #   dependsOn: Build
   
@@ -72,18 +75,6 @@ stages:
   - job: sca
     displayName: Review SCA
     steps:
-     - task: CmdLine@2
-       inputs:
-        script: ls -l 
-     - task: Gradle@3
-       inputs:
-        gradleWrapperFile: 'gradlew'
-        tasks: 'build'
-        publishJUnitResults: false
-        javaHomeOption: 'JDKVersion'
-        sonarQubeRunAnalysis: false
-        spotBugsAnalysis: false
-
      - task: CmdLine@2
        inputs:
         script: ls -l 
