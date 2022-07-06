@@ -77,12 +77,22 @@ stages:
     steps:
      - download: current
        artifact: Jar
+
+     - task: Maven@3
+       inputs:
+         mavenPomFile: 'pom.xml'
+         publishJUnitResults: false
+         javaHomeOption: 'JDKVersion'
+         mavenVersionOption: 'Default'
+         mavenAuthenticateFeed: false
+         effectivePomSkip: false
+         sonarQubeRunAnalysis: false
       
 
      - task: dependency-check-build-task@6
        inputs:
          projectName: 'spring-boot-kubernetes'
-         scanPath: '$(Pipeline.Workspace)/Jar/*.jar'
+         scanPath: '$(Pipeline.Workspace)/target/*.jar'
          format: 'HTML'
          failOnCVSS: '10'
          
