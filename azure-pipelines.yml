@@ -28,7 +28,7 @@ stages:
         spotBugsAnalysis: false
     - task: CmdLine@2
       inputs:
-       script: ls -l build/libs/
+       script: ls -l build/libs/spring-boot-kubernetes-0.0.1-SNAPSHOT.jar
 
 # - stage: Review_SAST
 #   dependsOn: Build
@@ -65,18 +65,22 @@ stages:
 #           SonarCloud: 'sonar-cloud'
 #           organization: '$(sonarCloudOrganization)'
 
-# - stage: Review_SCA
-#   #dependsOn: Review_SAST
-#   #dependsOn: Build
-#   jobs:
-#   - job: sca
-#     displayName: Review SCA
-#     steps:
-#      - task: dependency-check-build-task@6
-#        inputs:
-#          projectName: 'spring-boot-kubernetes'
-#          scanPath: '$(Pipeline.Workspace)'
-#          format: 'HTML'
+- stage: Review_SCA
+  #dependsOn: Review_SAST
+  #dependsOn: Build
+  jobs:
+  - job: sca
+    displayName: Review SCA
+    steps:
+     - task: CmdLine@2
+       inputs:
+        script: ls -l 
+
+     - task: dependency-check-build-task@6
+       inputs:
+         projectName: 'spring-boot-kubernetes'
+         scanPath: ' build/libs/spring-boot-kubernetes-0.0.1-SNAPSHOT.jar'
+         format: 'HTML'
          
 
 
