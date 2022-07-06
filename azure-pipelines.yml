@@ -75,6 +75,18 @@ stages:
      - task: CmdLine@2
        inputs:
         script: ls -l 
+     - task: Gradle@3
+       inputs:
+        gradleWrapperFile: 'gradlew'
+        tasks: 'build'
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        sonarQubeRunAnalysis: false
+        spotBugsAnalysis: false
+
+     - task: CmdLine@2
+       inputs:
+        script: ls -l 
 
      - task: dependency-check-build-task@6
        inputs:
