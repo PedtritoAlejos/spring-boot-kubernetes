@@ -68,22 +68,29 @@ stages:
 #           SonarCloud: 'sonar-cloud'
 #           organization: '$(sonarCloudOrganization)'
 
-# - stage: Review_SCA
-#   #dependsOn: Review_SAST
-#   #dependsOn: Build
-#   jobs:
-#   - job: sca
-#     displayName: Review SCA
-#     steps:
-#      - task: CmdLine@2
-#        inputs:
-#         script: ls -l 
+- stage: Review_SCA
+  #dependsOn: Review_SAST
+  #dependsOn: Build
+  jobs:
+  - job: sca
+    displayName: Review SCA
+    steps:
+     - task: CmdLine@2
+       inputs:
+        script: ls -l 
 
-#      - task: dependency-check-build-task@6
-#        inputs:
-#          projectName: 'spring-boot-kubernetes'
-#          scanPath: ' build/libs/spring-boot-kubernetes-0.0.1-SNAPSHOT.jar'
-#          format: 'HTML'
+     - download: current
+       artifact: Jar
+
+     - task: CmdLine@2
+       inputs:
+        script: ls -l 
+
+    #  - task: dependency-check-build-task@6
+    #    inputs:
+    #      projectName: 'spring-boot-kubernetes'
+    #      scanPath: ' build/libs/spring-boot-kubernetes-0.0.1-SNAPSHOT.jar'
+    #      format: 'HTML'
          
 
 
