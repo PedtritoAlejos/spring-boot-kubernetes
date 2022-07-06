@@ -28,7 +28,7 @@ stages:
         spotBugsAnalysis: false
     - task: CmdLine@2
       inputs:
-       script: ls -l
+       script: ls -l build/libs/
 
 # - stage: Review_SAST
 #   dependsOn: Build
