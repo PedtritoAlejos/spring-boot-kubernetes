@@ -77,14 +77,14 @@ stages:
     steps:
      - task: CmdLine@2
        inputs:
-        script: ls -l 
+        script: ls -l $(Build.ArtifactStagingDirectory)
 
      - download: current
        artifact: Jar
 
      - task: CmdLine@2
        inputs:
-        script: ls -l /Jar
+        script: ls -l $(Build.ArtifactStagingDirectory)/Jar
 
     #  - task: dependency-check-build-task@6
     #    inputs:
