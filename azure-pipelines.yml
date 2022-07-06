@@ -77,18 +77,13 @@ stages:
     steps:
      - download: current
        artifact: Jar
-       
-     - task: CmdLine@2
+      
+
+     - task: dependency-check-build-task@6
        inputs:
-        script: ls -l $(Pipeline.Workspace)/Jar
-
- 
-
-    #  - task: dependency-check-build-task@6
-    #    inputs:
-    #      projectName: 'spring-boot-kubernetes'
-    #      scanPath: ' build/libs/spring-boot-kubernetes-0.0.1-SNAPSHOT.jar'
-    #      format: 'HTML'
+         projectName: 'spring-boot-kubernetes'
+         scanPath: ' $(Pipeline.Workspace)/Jar/*.jar'
+         format: 'HTML'
          
 
 
