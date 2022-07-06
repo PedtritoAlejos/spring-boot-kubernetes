@@ -82,8 +82,9 @@ stages:
      - task: dependency-check-build-task@6
        inputs:
          projectName: 'spring-boot-kubernetes'
-         scanPath: ' $(Pipeline.Workspace)/Jar/*.jar'
+         scanPath: '$(Pipeline.Workspace)/Jar/*.jar'
          format: 'HTML'
+         failOnCVSS: '10'
          
 
 
