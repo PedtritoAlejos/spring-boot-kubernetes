@@ -80,7 +80,7 @@ stages:
        
      - task: CmdLine@2
        inputs:
-        script: ls -l $(Build.ArtifactStagingDirectory)
+        script: ls -l $(Pipeline.Workspace)/Jar
 
  
 
