@@ -75,16 +75,14 @@ stages:
   - job: sca
     displayName: Review SCA
     steps:
+     - download: current
+       artifact: Jar
+       
      - task: CmdLine@2
        inputs:
         script: ls -l $(Build.ArtifactStagingDirectory)
 
-     - download: current
-       artifact: Jar
-
-     - task: CmdLine@2
-       inputs:
-        script: ls -l $(Build.ArtifactStagingDirectory)/Jar
+ 
 
     #  - task: dependency-check-build-task@6
     #    inputs:
